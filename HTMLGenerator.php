@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.0
+ * @version     1.1
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -318,22 +318,34 @@ function html_list($ordered = FALSE, $list = array(), $attributes = array())
  *  );
  *
  *  $attributes = array(
- *      'class' => 'text',
- *      'style' => 'color: black;'
+ *      'table' => array(
+ *          'class' => 'table_result',
+ *          'width' => '100%'
+ *      ),
+ *      'th' => array(
+ *          'align' => 'left'
+ *      )
  *  );
  *
- *  echo html_list($headers, $rows, $attributes);
+ *  echo html_list($headers, $rows, $attributes, TRUE);
  * </code>
  *
- * @param   array   $headers    the list of header titles
- * @param   array   $rows       the list of cells
- * @param   array   $attributes an array with the attributes of the
- *                              element (e.g class, style, ...)
+ * @param   array   $headers            the list of header titles
+ * @param   array   $rows               the list of cells
+ * @param   array   $attributes         an array with the attributes of the
+ *                                      element (e.g class, style, ...)
+ * @param   array   $nested_attributes  boolean that defines if attributes
+ *                                      are used on inner table elements
  *
  * @return  string  the output string of the HTML element
  */
-function html_table($headers = array(), $rows = array(), $attributes = array())
+function html_table($headers = array(), $rows = array(), $attributes = array(), $nested_attributes = FALSE)
 {
+    $attributes_table = ($nested_attributes === TRUE ? $attributes['table'] : $attributes);
+    $attributes_table_row = ($nested_attributes === TRUE ? $attributes['tr'] : array());
+    $attributes_table_header = ($nested_attributes === TRUE ? $attributes['th'] : array());
+    $attributes_table_cell = ($nested_attributes === TRUE ? $attributes['td'] : array());
+
     /*
      * generate string of table headers
      */
@@ -345,10 +357,10 @@ function html_table($headers = array(), $rows = array(), $attributes = array())
 
         foreach ($headers as $header)
         {
-            $table_headings .= html_element('th', $header);
+            $table_headings .= html_element('th', $header, $attributes_table_header);
         }
 
-        $concatenated_header = html_element('tr', $table_headings);
+        $concatenated_header = html_element('tr', $table_headings, $attributes_table_row);
     }
 
     /*
@@ -364,21 +376,21 @@ function html_table($headers = array(), $rows = array(), $attributes = array())
 
                 foreach ($row as $cell)
                 {
-                    $cells .= html_element('td', $cell);
+                    $cells .= html_element('td', $cell, $attributes_table_cell);
                 }
             }
             else
             {
-                $cells .= html_element('td', $row);
+                $cells .= html_element('td', $row, $attributes_table_cell);
             }
 
-            $concatenated_cells .= html_element('tr', $cells);
+            $concatenated_cells .= html_element('tr', $cells, $attributes_table_row);
         }
     }
 
     $content = $concatenated_header.$concatenated_cells;
 
-    return html_element('table', $content, $attributes);
+    return html_element('table', $content, $attributes_table);
 }
 
 // --------------------------------------------------------------------
