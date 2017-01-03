@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.2
+ * @version     1.3
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -512,6 +512,33 @@ function html_form($content = '', $attributes = array())
 function html_input($attributes = array())
 {
     return html_element('input', '', $attributes, TRUE);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML textarea
+ *
+ * This function generates a string with the processed textarea tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'rows' => 4
+ *  );
+ *
+ *  echo html_textarea('This is just a text', $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_textarea($content = '', $attributes = array())
+{
+    return html_element('textarea', $content, $attributes);
 }
 
 // --------------------------------------------------------------------
