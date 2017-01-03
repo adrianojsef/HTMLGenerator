@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.1
+ * @version     1.2
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -310,87 +310,128 @@ function html_list($ordered = FALSE, $list = array(), $attributes = array())
  * Here is an example on how to use this function:
  *
  * <code>
- *  $headers = array('Shape', 'Color');
- *
- *  $rows = array(
- *      array('Rectangle', 'Black'),
- *      array('Triangle', 'Blue')
+ *  $content = array(
+ *      html_tr(array(html_th('Shape'), html_th('Color'))),
+ *      html_tr(array(html_td('Rectangle'), html_td('Blue'))),
+ *      html_tr(array(html_td('Triangle'), html_td('Red')))
  *  );
  *
  *  $attributes = array(
- *      'table' => array(
- *          'class' => 'table_result',
- *          'width' => '100%'
- *      ),
- *      'th' => array(
- *          'align' => 'left'
- *      )
+ *      'class' => 'table_result',
+ *      'width' => '100%'
  *  );
  *
- *  echo html_list($headers, $rows, $attributes, TRUE);
+ *  echo html_table($content, $attributes, TRUE);
  * </code>
  *
- * @param   array   $headers            the list of header titles
- * @param   array   $rows               the list of cells
+ * @param   mixed   $content            the content of the HTML element
  * @param   array   $attributes         an array with the attributes of the
  *                                      element (e.g class, style, ...)
- * @param   array   $nested_attributes  boolean that defines if attributes
- *                                      are used on inner table elements
  *
  * @return  string  the output string of the HTML element
  */
-function html_table($headers = array(), $rows = array(), $attributes = array(), $nested_attributes = FALSE)
+function html_table($content = array(), $attributes = array())
 {
-    $attributes_table = ($nested_attributes === TRUE ? $attributes['table'] : $attributes);
-    $attributes_table_row = ($nested_attributes === TRUE ? $attributes['tr'] : array());
-    $attributes_table_header = ($nested_attributes === TRUE ? $attributes['th'] : array());
-    $attributes_table_cell = ($nested_attributes === TRUE ? $attributes['td'] : array());
-
-    /*
-     * generate string of table headers
-     */
-    $concatenated_header = '';
-
-    if (is_array($headers) && ! empty($headers))
+    if (is_array($content))
     {
-        $table_headings = '';
-
-        foreach ($headers as $header)
-        {
-            $table_headings .= html_element('th', $header, $attributes_table_header);
-        }
-
-        $concatenated_header = html_element('tr', $table_headings, $attributes_table_row);
+        $content = implode('', $content);
     }
 
-    /*
-     * generate string of table cells
-     */
-    if (is_array($rows))
+    return html_element('table', $content, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML table row
+ *
+ * This function generates a string with the processed table row tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $content = array(
+ *      html_td('Rectangle'),
+ *      html_td('Blue')
+ *  );
+ *
+ *  $attributes = array(
+ *      'class' => 'text',
+ *      'style' => 'color: black;'
+ *  );
+ *
+ *  echo html_tr($content, $attributes);
+ * </code>
+ *
+ * @param   mixed   $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_tr($content = array(), $attributes = array())
+{
+    if (is_array($content))
     {
-        foreach ($rows as $row)
-        {   
-            if (is_array($row))
-            {
-                $cells = '';
-
-                foreach ($row as $cell)
-                {
-                    $cells .= html_element('td', $cell, $attributes_table_cell);
-                }
-            }
-            else
-            {
-                $cells .= html_element('td', $row, $attributes_table_cell);
-            }
-
-            $concatenated_cells .= html_element('tr', $cells, $attributes_table_row);
-        }
+        $content = implode('', $content);
     }
 
-    $content = $concatenated_header.$concatenated_cells;
+    return html_element('tr', $content, $attributes);
+}
 
-    return html_element('table', $content, $attributes_table);
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML table header
+ *
+ * This function generates a string with the processed table header tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'class' => 'text',
+ *      'style' => 'color: black;'
+ *  );
+ *
+ *  echo html_th('Example', $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_th($content = '', $attributes = array())
+{
+    return html_element('th', $content, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML table cell
+ *
+ * This function generates a string with the processed table cell tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'class' => 'text',
+ *      'style' => 'color: black;'
+ *  );
+ *
+ *  echo html_td('Example', $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_td($content = '', $attributes = array())
+{
+    return html_element('td', $content, $attributes);
 }
 
 // --------------------------------------------------------------------
