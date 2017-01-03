@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.3
+ * @version     1.4
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -551,8 +551,8 @@ function html_textarea($content = '', $attributes = array())
  *
  * <code>
  *  $options = array(
- *      '1' => 'One',
- *      '2' => 'Two'
+ *      html_option(1, 'One'),
+ *      html_option(2, Two')
  *  );
  *
  *  $attributes = array(
@@ -570,20 +570,47 @@ function html_textarea($content = '', $attributes = array())
  */
 function html_select($options = array(), $attributes = array())
 {
-    /*
-     * generate string of options
-     */
-    $concatenated_options = '';
-
     if (is_array($options))
     {
-        foreach ($options as $key => $value)
-        {
-            $concatenated_options .= html_element('option', $value, array('value' => $key));
-        }
+        $options = implode('', $options);
     }
 
-    return html_element('select', $concatenated_options, $attributes);
+    return html_element('select', $options, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML option
+ *
+ * This function generates a string with the processed option tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'selected' => 'selected'
+ *  );
+ *
+ *  echo html_option(1, 'One', $attributes);
+ * </code>
+ *
+ * @param   mixed   $value      the value of the HTML element
+ * @param   array   $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_option($value = '', $content = array(), $attributes = array())
+{
+    $attributes['value'] = $value;
+
+    if (is_array($content))
+    {
+        $content = implode('', $content);
+    }
+
+    return html_element('option', $content, $attributes);
 }
 
 // --------------------------------------------------------------------
