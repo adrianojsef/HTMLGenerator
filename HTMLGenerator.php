@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.4
+ * @version     1.4.1
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -477,14 +477,19 @@ function html_td($content = '', $attributes = array())
  *  echo html_form('Example', $attributes);
  * </code>
  *
- * @param   string  $content    the content of the HTML element
+ * @param   mixed   $content    the content of the HTML element
  * @param   array   $attributes an array with the attributes of the
  *                              element (e.g class, style, ...)
  *
  * @return  string  the output string of the HTML element
  */
-function html_form($content = '', $attributes = array())
+function html_form($content = array(), $attributes = array())
 {
+    if (is_array($content))
+    {
+        $content = implode('', $content);
+    }
+
     return html_element('form', $content, $attributes);
 }
 
