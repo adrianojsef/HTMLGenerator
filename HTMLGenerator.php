@@ -163,6 +163,33 @@ function html_a($href = '', $content = '', $attributes = array())
 // --------------------------------------------------------------------
 
 /**
+ * Generates an HTML button
+ *
+ * This function generates a string with the processed button tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'class' => 'button'
+ *  );
+ *
+ *  echo html_button('Submit', $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_button($content = '', $attributes = array())
+{
+    return html_element('button', $content, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
  * Generates an HTML paragraph
  *
  * This function generates a string with the processed paragraph tag.
