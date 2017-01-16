@@ -370,6 +370,72 @@ function html_table($content = array(), $attributes = array())
 // --------------------------------------------------------------------
 
 /**
+ * Generates an HTML table head
+ *
+ * This function generates a string with the processed table head tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'class' => 'text',
+ *      'style' => 'color: black;'
+ *  );
+ *
+ *  $content = html_tr(array(
+ *      html_th('ID'),
+ *      html_th('Name'),
+ *  ));
+ *
+ *  echo html_thead($content, $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_thead($content = '', $attributes = array())
+{
+    return html_element('thead', $content, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Generates an HTML table body
+ *
+ * This function generates a string with the processed table body tag.
+ * Here is an example on how to use this function:
+ *
+ * <code>
+ *  $attributes = array(
+ *      'class' => 'text',
+ *      'style' => 'color: black;'
+ *  );
+ *
+ *  $content = html_tr(array(
+ *      html_td('1'),
+ *      html_td('Blue'),
+ *  ));
+ *
+ *  echo html_tbody($content, $attributes);
+ * </code>
+ *
+ * @param   string  $content    the content of the HTML element
+ * @param   array   $attributes an array with the attributes of the
+ *                              element (e.g class, style, ...)
+ *
+ * @return  string  the output string of the HTML element
+ */
+function html_tbody($content = '', $attributes = array())
+{
+    return html_element('tbody', $content, $attributes);
+}
+
+// --------------------------------------------------------------------
+
+/**
  * Generates an HTML table row
  *
  * This function generates a string with the processed table row tag.
