@@ -43,9 +43,11 @@
  *
  * @return  string  the output string of the HTML element
  */
-function html_html($content = '', $attributes = array())
-{
-    return html_element('html', $content, $attributes);
+if ( ! function_exists('html_html')) {
+    function html_html($content = '', $attributes = array())
+    {
+        return html_element('html', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -70,9 +72,11 @@ function html_html($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_header($content = '', $attributes = array())
-{
-    return html_element('header', $content, $attributes);
+if ( ! function_exists('html_header')) {
+    function html_header($content = '', $attributes = array())
+    {
+        return html_element('header', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -97,9 +101,11 @@ function html_header($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_body($content = '', $attributes = array())
-{
-    return html_element('body', $content, $attributes);
+if ( ! function_exists('html_body')) {
+    function html_body($content = '', $attributes = array())
+    {
+        return html_element('body', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -124,9 +130,11 @@ function html_body($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_footer($content = '', $attributes = array())
-{
-    return html_element('footer', $content, $attributes);
+if ( ! function_exists('html_footer')) {
+    function html_footer($content = '', $attributes = array())
+    {
+        return html_element('footer', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -153,11 +161,13 @@ function html_footer($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_a($href = '', $content = '', $attributes = array())
-{
-    $attributes['href'] = $href;
+if ( ! function_exists('html_a')) {
+    function html_a($href = '', $content = '', $attributes = array())
+    {
+        $attributes['href'] = $href;
 
-    return html_element('a', $content, $attributes);
+        return html_element('a', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -182,9 +192,11 @@ function html_a($href = '', $content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_button($content = '', $attributes = array())
-{
-    return html_element('button', $content, $attributes);
+if ( ! function_exists('html_button')) {
+    function html_button($content = '', $attributes = array())
+    {
+        return html_element('button', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -210,9 +222,11 @@ function html_button($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_p($content = '', $attributes = array())
-{
-    return html_element('p', $content, $attributes);
+if ( ! function_exists('html_p')) {
+    function html_p($content = '', $attributes = array())
+    {
+        return html_element('p', $content, $attributes);
+    }
 }
 
 
@@ -240,14 +254,16 @@ function html_p($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_heading($level = 1, $content = '', $attributes = array())
-{
-    // transform given level to an integer
-    $level = intval($level);
-    // verify if the level is between 1 and 6, if not use the default
-    $heading = 'h'.($level >= 1 && $level <= 6 ? $level : 1);
+if ( ! function_exists('html_heading')) {
+    function html_heading($level = 1, $content = '', $attributes = array())
+    {
+        // transform given level to an integer
+        $level = intval($level);
+        // verify if the level is between 1 and 6, if not use the default
+        $heading = 'h'.($level >= 1 && $level <= 6 ? $level : 1);
 
-    return html_element($level, $content, $attributes);
+        return html_element($level, $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -273,9 +289,11 @@ function html_heading($level = 1, $content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_div($content = '', $attributes = array())
-{
-    return html_element('div', $content, $attributes);
+if ( ! function_exists('html_div')) {
+    function html_div($content = '', $attributes = array())
+    {
+        return html_element('div', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -307,25 +325,25 @@ function html_div($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_list($ordered = FALSE, $list = array(), $attributes = array())
-{
-    // verify if the list is ordered or not
-    $type = ($ordered === TRUE ? 'ol' : 'ul');
-
-    /*
-     * generate string of items
-     */
-    $content = '';
-
-    if (is_array($list))
+if ( ! function_exists('html_list')) {
+    function html_list($ordered = FALSE, $list = array(), $attributes = array())
     {
-        foreach ($list as $item)
-        {
-            $content .= html_element('li', $item);
-        }
-    }
+        // verify if the list is ordered or not
+        $type = ($ordered === TRUE ? 'ol' : 'ul');
 
-    return html_element($type, $content, $attributes);
+        /*
+        * generate string of items
+        */
+        $content = '';
+
+        if (is_array($list)) {
+            foreach ($list as $item) {
+                $content .= html_element('li', $item);
+            }
+        }
+
+        return html_element($type, $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -357,14 +375,15 @@ function html_list($ordered = FALSE, $list = array(), $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_table($content = array(), $attributes = array())
-{
-    if (is_array($content))
+if ( ! function_exists('html_table')) {
+    function html_table($content = array(), $attributes = array())
     {
-        $content = implode('', $content);
-    }
+        if (is_array($content)) {
+            $content = implode('', $content);
+        }
 
-    return html_element('table', $content, $attributes);
+        return html_element('table', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -395,9 +414,11 @@ function html_table($content = array(), $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_thead($content = '', $attributes = array())
-{
-    return html_element('thead', $content, $attributes);
+if ( ! function_exists('html_thead')) {
+    function html_thead($content = '', $attributes = array())
+    {
+        return html_element('thead', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -428,9 +449,11 @@ function html_thead($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_tbody($content = '', $attributes = array())
-{
-    return html_element('tbody', $content, $attributes);
+if ( ! function_exists('html_tbody')) {
+    function html_tbody($content = '', $attributes = array())
+    {
+        return html_element('tbody', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -461,14 +484,15 @@ function html_tbody($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_tr($content = array(), $attributes = array())
-{
-    if (is_array($content))
+if ( ! function_exists('html_tr')) {
+    function html_tr($content = array(), $attributes = array())
     {
-        $content = implode('', $content);
-    }
+        if (is_array($content)) {
+            $content = implode('', $content);
+        }
 
-    return html_element('tr', $content, $attributes);
+        return html_element('tr', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -494,9 +518,11 @@ function html_tr($content = array(), $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_th($content = '', $attributes = array())
-{
-    return html_element('th', $content, $attributes);
+if ( ! function_exists('html_th')) {
+    function html_th($content = '', $attributes = array())
+    {
+        return html_element('th', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -522,9 +548,11 @@ function html_th($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_td($content = '', $attributes = array())
-{
-    return html_element('td', $content, $attributes);
+if ( ! function_exists('html_td')) {
+    function html_td($content = '', $attributes = array())
+    {
+        return html_element('td', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -549,14 +577,15 @@ function html_td($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_form($content = array(), $attributes = array())
-{
-    if (is_array($content))
+if ( ! function_exists('html_form')) {
+    function html_form($content = array(), $attributes = array())
     {
-        $content = implode('', $content);
-    }
+        if (is_array($content)) {
+            $content = implode('', $content);
+        }
 
-    return html_element('form', $content, $attributes);
+        return html_element('form', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -580,9 +609,11 @@ function html_form($content = array(), $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_input($attributes = array())
-{
-    return html_element('input', '', $attributes, TRUE);
+if ( ! function_exists('html_input')) {
+    function html_input($attributes = array())
+    {
+        return html_element('input', '', $attributes, TRUE);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -607,9 +638,11 @@ function html_input($attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_textarea($content = '', $attributes = array())
-{
-    return html_element('textarea', $content, $attributes);
+if ( ! function_exists('html_textarea')) {
+    function html_textarea($content = '', $attributes = array())
+    {
+        return html_element('textarea', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -639,14 +672,15 @@ function html_textarea($content = '', $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_select($options = array(), $attributes = array())
-{
-    if (is_array($options))
+if ( ! function_exists('html_select')) {
+    function html_select($options = array(), $attributes = array())
     {
-        $options = implode('', $options);
-    }
+        if (is_array($options)) {
+            $options = implode('', $options);
+        }
 
-    return html_element('select', $options, $attributes);
+        return html_element('select', $options, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -672,16 +706,17 @@ function html_select($options = array(), $attributes = array())
  *
  * @return  string  the output string of the HTML element
  */
-function html_option($value = '', $content = array(), $attributes = array())
-{
-    $attributes['value'] = $value;
-
-    if (is_array($content))
+if ( ! function_exists('html_option')) {
+    function html_option($value = '', $content = array(), $attributes = array())
     {
-        $content = implode('', $content);
-    }
+        $attributes['value'] = $value;
 
-    return html_element('option', $content, $attributes);
+        if (is_array($content)) {
+            $content = implode('', $content);
+        }
+
+        return html_element('option', $content, $attributes);
+    }
 }
 
 // --------------------------------------------------------------------
@@ -696,22 +731,22 @@ function html_option($value = '', $content = array(), $attributes = array())
  *
  * @return  string  the output string of the concatenated attributes
  */
-function html_attributes($attributes = array())
-{
-    /*
-     * generate string of attributes
-     */
-    $concatenated_attributes = '';
-
-    if (is_array($attributes))
+if ( ! function_exists('html_attributes')) {
+    function html_attributes($attributes = array())
     {
-        foreach ($attributes as $key => $value)
-        {
-            $concatenated_attributes .= $key.'="'.$value.'" ';
-        }
-    }
+        /*
+        * generate string of attributes
+        */
+        $concatenated_attributes = '';
 
-    return $concatenated_attributes;
+        if (is_array($attributes)) {
+            foreach ($attributes as $key => $value) {
+                $concatenated_attributes .= $key.'="'.$value.'" ';
+            }
+        }
+
+        return $concatenated_attributes;
+    }
 }
 
 // --------------------------------------------------------------------
@@ -733,16 +768,15 @@ function html_attributes($attributes = array())
  *
  * @return  string  the output string of the concatenated attributes
  */
-function html_element($tag = '', $content = '', $attributes = array(), $empty = FALSE)
-{
-    $concatenated_attributes = html_attributes($attributes);
+if ( ! function_exists('html_element')) {
+    function html_element($tag = '', $content = '', $attributes = array(), $empty = FALSE)
+    {
+        $concatenated_attributes = html_attributes($attributes);
 
-    if ($empty === TRUE)
-    {
-        return "<{$tag} {$concatenated_attributes} />";
-    }
-    else
-    {
-        return "<{$tag} {$concatenated_attributes}>{$content}</{$tag}>";
+        if ($empty === TRUE) {
+            return "<{$tag} {$concatenated_attributes} />";
+        } else {
+            return "<{$tag} {$concatenated_attributes}>{$content}</{$tag}>";
+        }
     }
 }
