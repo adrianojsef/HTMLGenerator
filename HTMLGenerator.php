@@ -16,7 +16,7 @@
  * @category    Library
  * @author      Adriano Fernandes <adrianojsef>
  * @license     MIT License
- * @version     1.4.1
+ * @version     1.4.2
  * @link        https://github.com/adrianojsef/HTMLGenerator
  * @since       File available since Release 1.0
  */
@@ -312,13 +312,13 @@ if ( ! function_exists('html_div')) {
  *      'style' => 'color: black;'
  *  );
  *
- *  echo html_list(FALSE, $list, $attributes);
+ *  echo html_list(false, $list, $attributes);
  * </code>
  *
  * @param   boolean $ordered    type of list
  *                              This list can be ordered or unordered.
- *                                - ordered [TRUE]
- *                                - unordered [FALSE]
+ *                                - ordered [true]
+ *                                - unordered [false]
  * @param   array   $list       the list of items
  * @param   array   $attributes an array with the attributes of the
  *                              element (e.g class, style, ...)
@@ -326,10 +326,10 @@ if ( ! function_exists('html_div')) {
  * @return  string  the output string of the HTML element
  */
 if ( ! function_exists('html_list')) {
-    function html_list($ordered = FALSE, $list = array(), $attributes = array())
+    function html_list($ordered = false, $list = array(), $attributes = array())
     {
         // verify if the list is ordered or not
-        $type = ($ordered === TRUE ? 'ol' : 'ul');
+        $type = ($ordered === true ? 'ol' : 'ul');
 
         /*
         * generate string of items
@@ -366,7 +366,7 @@ if ( ! function_exists('html_list')) {
  *      'width' => '100%'
  *  );
  *
- *  echo html_table($content, $attributes, TRUE);
+ *  echo html_table($content, $attributes, true);
  * </code>
  *
  * @param   mixed   $content            the content of the HTML element
@@ -612,7 +612,7 @@ if ( ! function_exists('html_form')) {
 if ( ! function_exists('html_input')) {
     function html_input($attributes = array())
     {
-        return html_element('input', '', $attributes, TRUE);
+        return html_element('input', '', $attributes, true);
     }
 }
 
@@ -769,11 +769,11 @@ if ( ! function_exists('html_attributes')) {
  * @return  string  the output string of the concatenated attributes
  */
 if ( ! function_exists('html_element')) {
-    function html_element($tag = '', $content = '', $attributes = array(), $empty = FALSE)
+    function html_element($tag = '', $content = '', $attributes = array(), $empty = false)
     {
         $concatenated_attributes = html_attributes($attributes);
 
-        if ($empty === TRUE) {
+        if ($empty === true) {
             return "<{$tag} {$concatenated_attributes} />";
         } else {
             return "<{$tag} {$concatenated_attributes}>{$content}</{$tag}>";
